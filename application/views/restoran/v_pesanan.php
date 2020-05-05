@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Maps</title>
+    <title>constructo</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="<?php echo base_url() ?>template/css/magnific-popup.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>template/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>template/css/themify-icons.css">
+    <link rel="stylesheet" href="<?php echo base_url() ?>template/css/gijgo.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>template/css/nice-select.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>template/css/flaticon.css">
-    <link rel="stylesheet" href="<?php echo base_url() ?>template/css/gijgo.css">
-    <link rel="stylesheet" href="<?php echo base_url() ?>template/css/animate.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>template/css/slicknav.css">
+
     <link rel="stylesheet" href="<?php echo base_url() ?>template/css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
 </head>
@@ -40,14 +40,12 @@
                     <div class="row align-items-center">
                         <div class="col-xl-5 col-md-5 ">
                             <div class="header_left">
-                                <p>Hai, <?php echo $this->session->userdata("nama"); ?></p>
-                                <p>Buka Mulai (08.00-21.00)</p>
-
+                                <p>Opening Hour: (10.00-07.00)</p>
                             </div>
                         </div>
                         <div class="col-xl-7 col-md-7">
                             <div class="header_right d-flex justify-content-end">
-                                <a href="<?php echo base_url() ?>login/logout" class="boxed-btn3">Logout</a>
+                                <a href="#" class="boxed-btn3">Get a Quote</a>
                             </div>
 
                         </div>
@@ -71,8 +69,8 @@
                                         <img src="img/icon/header-address.svg" alt="">
                                     </div>
                                     <div class="address_info">
-                                        <h3>Dapat Di Kunjungi DI</h3>
-                                        <p>Gununganyar, Kota Surabaya, Jawa Timur</p>
+                                        <h3>Address</h3>
+                                        <p>20/D, Kings road, Green lane</p>
                                     </div>
                                 </div>
                                 <div class="single_address d-flex">
@@ -80,8 +78,8 @@
                                         <img src="img/icon/headset.svg" alt="">
                                     </div>
                                     <div class="address_info">
-                                        <h3>Kontak</h3>
-                                        <p>+62 812 3001 6481</p>
+                                        <h3>Call Us</h3>
+                                        <p>+10 673 567 367</p>
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +104,7 @@
                                         <ul id="navigation">
                                             <li><a href="<?php echo base_url() ?>cafe">Beranda</a></li>
                                             <li><a href="<?php echo base_url() ?>cafe/map">Maps</a></li>
-                                            <li><a href="<?php echo base_url() ?>cafe/resto">Restoran</a></li>                                            
+                                            <li><a href="<?php echo base_url() ?>cafe/resto">Restoran</a></li>                            
                                         </ul>
                                     </nav>
                                 </div>
@@ -138,8 +136,8 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="bradcam_text text-center">
-                        <h3>Maps</h3>
-                        <p><a href="index.html">Home</a> / Maps</p>
+                        <h3>Pembayaran</h3>
+                        <p><a href="<?php echo base_url() ?>cafe">beranda</a> / Pembayaran</p>
                     </div>
                 </div>
             </div>
@@ -147,106 +145,57 @@
     </div>
     <!--/ bradcam_area  -->
 
-    <!-- ================ contact section start ================= -->
-    <section class="contact-section">
-        <div class="container">
-            <div class="d-none d-sm-block mb-5 pb-4">
-                <div id="map" style="height: 480px; position: relative; overflow: hidden;"> </div>
-                <script>
-                    function initMap() {
-                        var uluru = {
-                            lat: -25.363,
-                            lng: 131.044
-                        };
-                        var grayStyles = [{
-                                featureType: "all",
-                                stylers: [{
-                                        saturation: -90
-                                    },
-                                    {
-                                        lightness: 50
-                                    }
-                                ]
-                            },
-                            {
-                                elementType: 'labels.text.fill',
-                                stylers: [{
-                                    color: '#ccdee9'
-                                }]
-                            }
-                        ];
-                        var map = new google.maps.Map(document.getElementById('map'), {
-                            center: {
-                                lat: -31.197,
-                                lng: 150.744
-                            },
-                            zoom: 9,
-                            styles: grayStyles,
-                            scrollwheel: false
-                        });
-                    }
-                </script>
-                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpfS1oRGreGSBU5HHjMmQ3o5NLw7VdJ6I&amp;callback=initMap">
-                </script>
+    <!-- service_area_start  -->
 
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+            <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
             </div>
-
-
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="contact-title">Pemesanan</h2>
-                </div>
-                <div class="col-lg-8">
-                    <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" placeholder="Kesan dalam melakukan pesanan"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <input class="form-control valid" name="name" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" placeholder="Masukkan Nama">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <input class="form-control valid" name="email" id="email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder="Alamat Email">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group mt-3">
-                            <button type="submit" class="button button-contactForm boxed-btn">Kirim</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-lg-3 offset-lg-1">
-                    <div class="media contact-info">
-                        <span class="contact-info__icon"><i class="ti-home"></i></span>
-                        <div class="media-body">
-                            <h3>indonesia, jawatimur</h3>
-                            <p>Gununganyar, Kota Surabaya</p>
-                        </div>
-                    </div>
-                    <div class="media contact-info">
-                        <span class="contact-info__icon"><i class="ti-tablet"></i></span>
-                        <div class="media-body">
-                            <h3>+62 812 3001 6481</h3>
-                            <p>Setiap Hari 08.00-21.00</p>
-                        </div>
-                    </div>
-                    <div class="media contact-info">
-                        <span class="contact-info__icon"><i class="ti-email"></i></span>
-                        <div class="media-body">
-                            <h3>Zondaan@gmail.com</h3>
-                            <p>Jika ada kesalahan kirim ke alamat email</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
             </div>
         </div>
-    </section>
-    <!-- ================ contact section end ================= -->
+        <div class="table-responsive">
+            <?php
+            $id = $warung['id_warung'];
+            $nama_warung = $this->db->query("SELECT * FROM restoran JOIN pesanan ON restoran.id_resto=pesanan.id_warung WHERE restoran.id_resto=$id")->row_array();
+            ?>
+            <h3 class="text-center mt-3">Detail Pesanan Warung "<?= $nama_warung['nama_resto'] ?>" Meja <span style="color: red"><?= $warung['no_meja'] ?></span></h3>
+            <table class="table table-bordered" style="text-align: center">
+                <tr>
+                    <th>No</th>
+                    <th>Nama Menu</th>
+                    <th>Harga</th>
+                    <th>Jumlah Pesan</th>
+                    <th>Total</th>
+                </tr>
+                <?php
+                $no = 1;
+                $totalbeli = 0;
+                // $hasil = mysql_fetch_array($data);
+                foreach ($pesanan as $x) {
+                ?>
+                    <tr>
+                        <td><?php echo $no; ?></td>
+                        <td><?php echo $x['nama_menu']; ?></td>
+                        <td>Rp. <?php echo number_format($x['harga_menu']); ?></td>
+                        <td><?php echo $x['jumlah_pesanan']; ?></td>
+                        <td>Rp. <?php echo number_format($x['harga_total']); ?></td>
+                        <?php $totalbeli = $totalbeli + $x['harga_total']; ?>
+                    </tr>
+                    <?php $no++; ?>
+                <?php
+                }
+                ?>
+                <tr>
+                    <td colspan="4">Total</td>
+                    <td>Rp. <?= number_format($totalbeli); ?></td>
+                </tr>
+            </table>
+        </div>
+    </main>
+    <!-- service_area_end  -->
     <!-- Modal -->
     <div class="modal fade custom_search_pop" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -272,11 +221,13 @@
     <script src="<?php echo base_url() ?>template/js/scrollIt.js"></script>
     <script src="<?php echo base_url() ?>template/js/jquery.scrollUp.min.js"></script>
     <script src="<?php echo base_url() ?>template/js/wow.min.js"></script>
+    <script src="<?php echo base_url() ?>template/js/gijgo.min.js"></script>
     <script src="<?php echo base_url() ?>template/js/nice-select.min.js"></script>
     <script src="<?php echo base_url() ?>template/js/jquery.slicknav.min.js"></script>
     <script src="<?php echo base_url() ?>template/js/jquery.magnific-popup.min.js"></script>
     <script src="<?php echo base_url() ?>template/js/plugins.js"></script>
-    <script src="<?php echo base_url() ?>template/js/gijgo.min.js"></script>
+
+
 
     <!--contact js-->
     <script src="<?php echo base_url() ?>template/js/contact.js"></script>
@@ -285,18 +236,20 @@
     <script src="<?php echo base_url() ?>template/js/jquery.validate.min.js"></script>
     <script src="<?php echo base_url() ?>template/js/mail-script.js"></script>
 
-    <script src="<?php echo base_url() ?>template/js/main.js"></script>
+
+    <script src="js/main.js"></script>
+
     <script>
         $('#datepicker').datepicker({
             iconsLibrary: 'fontawesome',
             icons: {
-                rightIcon: '<span class="fa fa-caret-down"></span>'
+                rightIcon: '<span class="fa fa-calendar-o"></span>'
             }
         });
         $('#datepicker2').datepicker({
             iconsLibrary: 'fontawesome',
             icons: {
-                rightIcon: '<span class="fa fa-caret-down"></span>'
+                rightIcon: '<span class="fa fa-calendar-o"></span>'
             }
 
         });

@@ -46,7 +46,7 @@
                         </div>
                         <div class="col-xl-7 col-md-7">
                             <div class="header_right d-flex justify-content-end">
-                                <a href="<?php echo base_url()?>login/logout" class="boxed-btn3">Logout</a>
+                                <a href="<?php echo base_url() ?>login/logout" class="boxed-btn3">Logout</a>
                             </div>
 
                         </div>
@@ -103,23 +103,9 @@
                                 <div class="main-menu  d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a class="active" href="<?php echo base_url()?>/cafe">Beranda</a></li>
-                                            <li><a href="<?php echo base_url()?>/cafe/map">Maps</a></li>
-                                            <li><a href="#">Services</a></li>
-                                            <li><a href="#">pages <i class="ti-angle-down"></i></a>
-                                                <ul class="submenu">
-                                                    <li><a href="#">project</a></li>
-                                                    <li><a href="#">elements</a></li>
-                                                    <li><a href="#">project details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">blog <i class="ti-angle-down"></i></a>
-                                                <ul class="submenu">
-                                                    <li><a href="#">blog</a></li>
-                                                    <li><a href="#">single-blog</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">Contact</a></li>
+                                            <li><a href="<?php echo base_url() ?>cafe">Beranda</a></li>
+                                            <li><a href="<?php echo base_url() ?>cafe/map">Maps</a></li>
+                                            <li><a href="<?php echo base_url() ?>cafe/resto">Restoran</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -501,11 +487,6 @@
         </div>
     </div>
     <!-- gallery_area-END -->
-
-    <!-- more_pro_btn_start  -->
-    <a href="#" class="more_pro_btn">Pesan Sekarang</a>
-    <!-- more_pro_btn_end  -->
-
     <div class="testimonial_area ">
         <div class="container">
             <div class="row">
@@ -522,12 +503,12 @@
                             <div class="single_testmonial text-center">
                                 <div class="testmonial_author">
                                     <div class="thumb">
-                                        <img src="<?php echo base_url() ?>template/img/testimonial/1.png" alt="">
+                                        <img src="<?php echo base_url() ?>template/img/testimonial/2.png" alt="">
                                     </div>
-                                    <h4>Jordi</h4>
-                                    <span>Client</span>
+                                    <h4>Handi Fajar Setyawan</h4>
+                                    <span>Hobby makan dan main game dan ngoding</span>
                                 </div>
-                                <p>“Pada web ini menarik sekali”</p>
+                                <p>“Web ini ispirasi untuk menemukan makanan lezat”</p>
                             </div>
                         </div>
                     </div>
@@ -535,7 +516,7 @@
             </div>
         </div>
     </div>
-    </footer>
+    
     <!-- footer_end  -->
 
     <!-- JS here -->
