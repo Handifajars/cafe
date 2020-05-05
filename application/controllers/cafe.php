@@ -12,5 +12,9 @@ class cafe extends CI_Controller {
 	{
 		$this->load->view('v_maps');
 	}
+	public function resto()
+	{
+		$this->load->view('restoran/v_resto');
+	}
 }
 ?>
