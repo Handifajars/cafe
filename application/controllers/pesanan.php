@@ -3,6 +3,7 @@ class pesanan extends CI_Controller {
 
 	function __construct(){
         parent::__construct();
+        $this->load->model('m_data');
         $this->load->library('form_validation');		
 	}
     public function menu()
@@ -46,6 +47,62 @@ class pesanan extends CI_Controller {
             redirect(base_url().'pesanan/pesanan?id=' . $last['id_pesanan']);
         } else {
             $this->load->view('restoran/v_menu', $data);
+        }
+    }
+    public function delivery()
+    {
+        $id = $this->input->get('id');
+        $data['title'] = 'Menu';
+        $data['kantin'] = $this->db->get_where('menu', ['id_warung' => $id])->result_array();
+        $nama = $this->session->userdata('nama');
+        $data['user'] = $this->db->get_where('user', ['nama' => $nama])->result_array();
+
+        if ($this->input->post()) {
+            $id = $this->input->post('id');
+            $meja = $this->input->post('meja');
+            $nama = $this->session->userdata('nama');
+            $pesanan = array(
+                'id_warung' => $id,
+                'no_meja' => $meja,
+                'nama_pesanan' => $nama
+            );
+            $this->db->insert('pesanan', $pesanan);
+
+            $last = $this->db->query("SELECT * FROM pesanan ORDER BY id_pesanan DESC LIMIT 1")->row_array();
+            $hasil = $this->db->get_where('menu', ['id_warung' => $id])->result_array();
+            $no = 1;
+            foreach ($hasil as $x) {
+                if ($this->input->post("jumlah$no") > 0) {
+                    $pesan = htmlspecialchars($this->input->post("jumlah$no"));
+                    $nama = $this->session->userdata('nama');
+                    $alamat = $this->input->post('alamat');
+                    $no_hp = $this->input->post('nohp');
+                    $menu = $x['nama'];
+                    $harga = $x['harga'];
+                    $total = $pesan * $harga;
+                    $data1 = array(
+                        'id_delivery' => $last['id_pesanan'],
+                        'nama_d' => $nama,
+                        'harga_d' => $total,
+                        'alamat' => $alamat,
+                        'no_hp' => $no_hp
+                    );
+                    $data2 = array(
+                        'id_pesanan' => $last['id_pesanan'],
+                        'nama_menu' => $menu,
+                        'harga_menu' => $harga,
+                        'jumlah_pesanan' => $pesan,
+                        'harga_total' => $total
+                    );
+                    $this->db->insert('detail_pesanan', $data2);
+                    $this->db->insert('delivery', $data1);
+                }
+                $no++;
+            }
+            echo "<script>alert('Pesanan Telah Diterima');</script>";
+            redirect(base_url().'pesanan/pesanan?id=' . $last['id_pesanan']);
+        } else {
+            $this->load->view('restoran/v_order', $data);
         }
     }
 
