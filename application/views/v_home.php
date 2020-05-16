@@ -106,6 +106,8 @@
                                             <li><a href="<?php echo base_url() ?>cafe">Beranda</a></li>
                                             <li><a href="<?php echo base_url() ?>cafe/map">Maps</a></li>
                                             <li><a href="<?php echo base_url() ?>cafe/resto">Restoran</a></li>
+                                            <li><a href="<?php echo base_url() ?>cafe/delivery">delivery</a></li>
+                                            <li><a data-toggle="modal" data-target="#reservasi" href="#">Reservation</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -561,6 +563,61 @@
                     <input type="text" placeholder="search">
                     <button type="submit">search</button>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="reservasi" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="myModalLabel">Buat Pesanan Reservasi</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                </div>
+                <form class="form-horizontal" action="<?php echo base_url(); ?>cafe/reservasi" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="control-label col-xs-3"><?php echo $this->session->userdata("nama"); ?></label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3">Pilih Restoran</label>
+                            <div class="col-xs-8">
+                                <select name="tempat" class="form-control" required>
+                                    <option value="">-PILIH-</option>
+                                    <?php foreach ($maps as $data) : ?>
+                                        <option value='<?php echo $data['alamat_resto'] ?>'><?php echo $data['alamat_resto'] ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3">Masukkan tanggal</label>
+                            <div class="col-xs-8">
+                                <input name="waktu" class="form-control" type="date" placeholder="tanggal" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3">Jumlah orang</label>
+                            <div class="col-xs-8">
+                                <select name="jumlah" class="form-control" required>
+                                    <option value="" aria-readonly="false">Silakan pilih jumlah orang</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                        <button class="btn btn-info">Pesan</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

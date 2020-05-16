@@ -42,7 +42,6 @@
                             <div class="header_left">
                                 <p>Hai, <?php echo $this->session->userdata("nama"); ?></p>
                                 <p>Buka Mulai (08.00-21.00)</p>
-
                             </div>
                         </div>
                         <div class="col-xl-7 col-md-7">
@@ -77,7 +76,7 @@
                                 </div>
                                 <div class="single_address d-flex">
                                     <div class="icon">
-                                        <img src="img/icon/headset.svg" alt="">
+                                        <img src="<?php echo base_url() ?>template/img/icon/headset.svg" alt="">
                                     </div>
                                     <div class="address_info">
                                         <h3>Kontak</h3>
@@ -96,7 +95,7 @@
                             <div class="col-12 d-lg-none">
                                 <div class="logo ">
                                     <a href="#">
-                                        <img src="img/logo.png" alt="">
+                                        <img src="<?php echo base_url() ?>template/img/logo.png" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -106,7 +105,9 @@
                                         <ul id="navigation">
                                             <li><a href="<?php echo base_url() ?>cafe">Beranda</a></li>
                                             <li><a href="<?php echo base_url() ?>cafe/map">Maps</a></li>
-                                            <li><a href="<?php echo base_url() ?>cafe/resto">Restoran</a></li>                                            
+                                            <li><a href="<?php echo base_url() ?>cafe/resto">Restoran</a></li>
+                                            <li><a href="<?php echo base_url() ?>cafe/delivery">delivery</a></li>
+                                            <li><a data-toggle="modal" data-target="#reservasi" href="#">Reservation</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -151,74 +152,70 @@
     <section class="contact-section">
         <div class="container">
             <div class="d-none d-sm-block mb-5 pb-4">
-                <div id="map" style="height: 480px; position: relative; overflow: hidden;"> </div>
-                <script>
-                    function initMap() {
-                        var uluru = {
-                            lat: -25.363,
-                            lng: 131.044
-                        };
-                        var grayStyles = [{
-                                featureType: "all",
-                                stylers: [{
-                                        saturation: -90
-                                    },
-                                    {
-                                        lightness: 50
-                                    }
-                                ]
-                            },
-                            {
-                                elementType: 'labels.text.fill',
-                                stylers: [{
-                                    color: '#ccdee9'
-                                }]
-                            }
-                        ];
-                        var map = new google.maps.Map(document.getElementById('map'), {
-                            center: {
-                                lat: -31.197,
-                                lng: 150.744
-                            },
-                            zoom: 9,
-                            styles: grayStyles,
-                            scrollwheel: false
-                        });
-                    }
-                </script>
-                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpfS1oRGreGSBU5HHjMmQ3o5NLw7VdJ6I&amp;callback=initMap">
-                </script>
 
+                <head>
+                    <title>Maps Cafe</title>
+                    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
+                    <script type="text/javascript">
+                        function init() {
+                            var info_window = new google.maps.InfoWindow();
+
+                            // menentukan level zoom
+                            var zoom = 12;
+
+                            // menentikan latitude dan longitude
+                            var pos = new google.maps.LatLng(-7.244103300143218, 112.75935786910324);
+
+                            // menentukan opsi peta
+                            var options = {
+                                'center': pos,
+                                'zoom': zoom,
+                                'mapTypeId': google.maps.MapTypeId.ROADMAP
+                            };
+
+                            // membuat peta
+                            var map = new google.maps.Map(document.getElementById('maps'), options);
+                            info_window = new google.maps.InfoWindow({
+                                'content': 'loading...'
+                            });
+
+                            // membuat marker
+                            <?php foreach ($maps as $map) { ?>
+                                var marker = new google.maps.Marker({
+                                    title: '<?php echo $map['nama_resto'] ?>',
+                                    alamat: '<?php echo $map['alamat_resto'] ?>',
+                                    position: new google.maps.LatLng(<?php echo $map['lat'] ?>, <?php echo $map['lng'] ?>),
+                                    animation: google.maps.Animation.BOUNCE,
+                                    map: map
+                                });
+
+
+                                // set marker di peta
+                                marker.setMap(map);
+
+                                // membuat event ketika marker di click
+                                google.maps.event.addListener(marker, 'click', function() {
+                                    info_window.setContent('<b>' + this.title + '<br>' + this.alamat + '</b>');
+                                    info_window.open(map, this);
+                                });
+                            <?php  } ?>
+                        }
+                        google.maps.event.addDomListener(window, 'load', init);
+                    </script>
+                </head>
+
+                <body>
+                    <div id="maps" style="height: 480px; position: relative; overflow: hidden;"> </div>
+                </body>
             </div>
 
 
             <div class="row">
                 <div class="col-12">
-                    <h2 class="contact-title">Pemesanan</h2>
-                </div>
-                <div class="col-lg-8">
-                    <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" placeholder="Kesan dalam melakukan pesanan"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <input class="form-control valid" name="name" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" placeholder="Masukkan Nama">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <input class="form-control valid" name="email" id="email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder="Alamat Email">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group mt-3">
-                            <button type="submit" class="button button-contactForm boxed-btn">Kirim</button>
-                        </div>
-                    </form>
+                    <h2 class="contact-title"> <a data-toggle="modal" data-target="#reservasi" href="#">
+                            Reservation
+                        </a></h2>
+
                 </div>
                 <div class="col-lg-3 offset-lg-1">
                     <div class="media contact-info">
@@ -248,13 +245,69 @@
     </section>
     <!-- ================ contact section end ================= -->
     <!-- Modal -->
-    <div class="modal fade custom_search_pop" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade custom_search_pop" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="serch_form">
                     <input type="text" placeholder="search">
                     <button type="submit">search</button>
                 </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal reservasi -->
+    <div class="modal fade" id="reservasi" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="myModalLabel">Buat Pesanan Reservasi</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                </div>
+                <form class="form-horizontal" action="<?php echo base_url(); ?>cafe/reservasi" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="control-label col-xs-3"><?php echo $this->session->userdata("nama"); ?></label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3">Pilih Restoran</label>
+                            <div class="col-xs-8">
+                                <select name="tempat" class="form-control" required>
+                                    <option value="">-PILIH-</option>
+                                    <?php foreach ($maps as $data) : ?>
+                                        <option value='<?php echo $data['alamat_resto'] ?>'><?php echo $data['alamat_resto'] ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3">Masukkan tanggal</label>
+                            <div class="col-xs-8">
+                                <input name="waktu" class="form-control" type="date" placeholder="tanggal" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3">Jumlah orang</label>
+                            <div class="col-xs-8">
+                                <select name="jumlah" class="form-control" required>
+                                    <option value="" aria-readonly="false">Silakan pilih jumlah orang</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                        <button class="btn btn-info">Pesan</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

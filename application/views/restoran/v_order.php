@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Restoran</title>
+    <title>constructo</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -33,7 +33,7 @@
         <![endif]-->
 
     <!-- header-start -->
-     <header>
+    <header>
         <div class="header-area ">
             <div class="header-top_area d-none d-lg-block">
                 <div class="container">
@@ -139,8 +139,8 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="bradcam_text text-center">
-                        <h3>Restoran</h3>
-                        <p><a href="<?php echo base_url() ?>cafe">beranda</a> / Restoran</p>
+                        <h3>Daftar Menu</h3>
+                        <p><a href="<?php echo base_url() ?>cafe">beranda</a> / Daftar Menu</p>
                     </div>
                 </div>
             </div>
@@ -149,32 +149,46 @@
     <!--/ bradcam_area  -->
 
     <!-- service_area_start  -->
+    <form method="post" action="<?= base_url('pesanan/delivery') ?>">
+    <?php foreach ($user as $data) : ?>
+                  <input type="hidden" name="nohp" value="<?php echo $data['no_hp_user'] ?>">
+                  <input type="hidden" name="alamat" value="<?php echo $data['alamat_user']?>">
+                  <?php endforeach ?>
     <div class="service_area add_padding">
         <div class="container">
             <div class="row">
-                <?php foreach ($resto as $data) : ?>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="single_service">
-                            <div class="thumb">
-                                <img src="<?php echo base_url('gambar/' . $data->gambar_resto . ''); ?>" height="200px" width="300px">
-                            </div>
-                            <div class="service_info">
-                                <a href="#">
-                                    <h3><?php echo $data->nama_resto; ?></h3>
-                                </a>
-                                <p><?php echo $data->alamat; ?></p>
-                                <p><?php echo $data->deskripsi; ?></p>
-                                <a class="d-flex align-items-center" href="<?= base_url('pesanan/menu') ?>?id=<?php echo $data->id_resto; ?>">Kunjungi<i class="ti-angle-right"></i>
-                                </a>
+                <?php $id_warung = $this->input->get('id') ?>
+                
+                    <?php
+                    $no = 1;
+                    foreach ($kantin as $x) {
+                    ?>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="single_service">
+                                <div class="thumb">
+                                    <img src="<?php echo base_url()?>gambar/<?php echo $x['gambar']?>" width='300px' height='300px' >
+                                    <!-- <img src="<?php echo base_url() ?>template/img/restoran/1.jpg" alt=""> -->
+                                </div>
+                                <div class="service_info">
+                                    <a href="#">
+                                        <h3><?php echo $x['nama'] ?></h3>
+                                    </a>
+                                    <p>Rp. <?php echo number_format($x['harga']); ?></p>
+                                    <p><input type="number" name="jumlah<?= $no ?>" min="0"></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                <?php endforeach ?>
+                        <?php $no++; ?>
+                    <?php }
+                    ?>
+                    <input type="hidden" value="<?= $id_warung ?>" class="form-control col-md-3" placeholder="Nama Pemesan...." type="text" name="id"><br>
+                    <input required class="form-control col-md-3" placeholder="Nomor Mejaaaaaa...." type="number" name="meja"><br>
+                    <button type="submit" name="pesan" class="btn btn-primary" onclick="return confirm('yakin tidak ada lagi?')">Delivery</button>
             </div>
         </div>
     </div>
+    </form>
     <!-- service_area_end  -->
-
     <!-- footer_start  -->
     <footer class="footer">
         <div class="footer_top">
@@ -182,6 +196,18 @@
                 <div class="row">
                     <div class="col-xl-3 col-md-6 col-lg-3 ">
                         <div class="footer_widget">
+                            <h3 class="footer_title">
+                                About
+                            </h3>
+                            <p>5th flora, 700/D kings road, green <br> lane New York-1782 <br>
+                                <a href="#">+10 367 826 2567</a> <br>
+                                <a href="#">contact@carpenter.com</a>
+                            </p>
+                            <p>
+
+
+
+                            </p>
                             <div class="socail_links">
                                 <ul>
                                     <li>
@@ -214,6 +240,45 @@
 
                         </div>
                     </div>
+                    <div class="col-xl-2 col-md-6 col-lg-2">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                Popular Searches
+                            </h3>
+                            <ul>
+                                <li><a href="#">Apartment for rent </a></li>
+                                <li><a href="#">Office for rent</a></li>
+                                <li><a href="#"> Apartment for sale</a></li>
+                                <li><a href="#"> Luxuries</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-6 col-lg-2 offset-xl-1 offset-lg-1">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                Useful Links
+                            </h3>
+                            <ul>
+                                <li><a href="#">About</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#"> Contact</a></li>
+                                <li><a href="#"> Appointment</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6 col-lg-4">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                Subscribe
+                            </h3>
+                            <form action="#" class="newsletter_form">
+                                <input type="text" placeholder="Enter your mail">
+                                <button type="submit">Subscribe</button>
+                            </form>
+                            <p class="newsletter_text">Esteem spirit temper too say adieus who direct esteem esteems
+                                luckily.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -222,6 +287,13 @@
                 <div class="footer_border"></div>
                 <div class="row">
                     <div class="col-xl-12">
+                        <p class="copy_right text-center">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;<script>
+                                document.write(new Date().getFullYear());
+                            </script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
                     </div>
                 </div>
             </div>

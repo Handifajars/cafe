@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Restoran</title>
+    <title>constructo</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -33,7 +33,7 @@
         <![endif]-->
 
     <!-- header-start -->
-     <header>
+    <header>
         <div class="header-area ">
             <div class="header-top_area d-none d-lg-block">
                 <div class="container">
@@ -139,8 +139,8 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="bradcam_text text-center">
-                        <h3>Restoran</h3>
-                        <p><a href="<?php echo base_url() ?>cafe">beranda</a> / Restoran</p>
+                        <h3>Delivery</h3>
+                        <p><a href="<?php echo base_url() ?>cafe">beranda</a> / Delivery</p>
                     </div>
                 </div>
             </div>
@@ -148,8 +148,8 @@
     </div>
     <!--/ bradcam_area  -->
 
-    <!-- service_area_start  -->
-    <div class="service_area add_padding">
+     <!-- service_area_start  -->
+     <div class="service_area add_padding">
         <div class="container">
             <div class="row">
                 <?php foreach ($resto as $data) : ?>
@@ -164,7 +164,7 @@
                                 </a>
                                 <p><?php echo $data->alamat; ?></p>
                                 <p><?php echo $data->deskripsi; ?></p>
-                                <a class="d-flex align-items-center" href="<?= base_url('pesanan/menu') ?>?id=<?php echo $data->id_resto; ?>">Kunjungi<i class="ti-angle-right"></i>
+                                <a class="d-flex align-items-center" href="<?= base_url('pesanan/delivery') ?>?id=<?php echo $data->id_resto; ?>">Kunjungi<i class="ti-angle-right"></i>
                                 </a>
                             </div>
                         </div>
