@@ -88,7 +88,7 @@ class admin extends CI_Controller
 			return $this->upload->data()["file_name"];
 		}
 
-		return $this->input->post('old_gambar');;
+		return $this->input->post('old_gambar');
 	}
 
 	function tambah_aksi()
