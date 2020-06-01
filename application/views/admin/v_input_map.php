@@ -115,6 +115,17 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url() ?>admin/restoran">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                Restoran
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url() ?>admin/delivery">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2">
                   <line x1="18" y1="20" x2="18" y2="10"></line>
@@ -125,7 +136,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="<?php echo base_url() ?>admin/reservasi">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers">
                   <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
                   <polyline points="2 17 12 22 22 17"></polyline>
@@ -149,7 +160,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="<?php echo base_url() ?>admin/user">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
                   <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                   <circle cx="9" cy="7" r="4"></circle>
@@ -167,71 +178,72 @@
         <h3>Tambah Alamat Restoran</h3>
         <br>
         <div class="table-responsive">
-        <head>
-                        <meta charset="utf-8">
-                        <meta name="viewport" content="width=device-width">
-                        <title>Maps</title>
 
-                        <script src="http://maps.googleapis.com/maps/api/js"></script>
-                        <script>
-                            // variabel global marker
-                            var marker;
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width">
+            <title>Maps</title>
 
-                            function taruhMarker(peta, posisiTitik) {
+            <script src="http://maps.googleapis.com/maps/api/js"></script>
+            <script>
+              // variabel global marker
+              var marker;
 
-                                if (marker) {
-                                    // pindahkan marker
-                                    marker.setPosition(posisiTitik);
-                                } else {
-                                    // buat marker baru
-                                    marker = new google.maps.Marker({
-                                        position: posisiTitik,
-                                        map: peta
-                                    });
-                                }
+              function taruhMarker(peta, posisiTitik) {
 
-                                // isi nilai koordinat ke form
-                                document.getElementById("lat").value = posisiTitik.lat();
-                                document.getElementById("lng").value = posisiTitik.lng();
+                if (marker) {
+                  // pindahkan marker
+                  marker.setPosition(posisiTitik);
+                } else {
+                  // buat marker baru
+                  marker = new google.maps.Marker({
+                    position: posisiTitik,
+                    map: peta
+                  });
+                }
 
-                            }
+                // isi nilai koordinat ke form
+                document.getElementById("lat").value = posisiTitik.lat();
+                document.getElementById("lng").value = posisiTitik.lng();
 
-                            function initialize() {
-                                var propertiPeta = {
-                                    center: new google.maps.LatLng(-7.2756141,112.6426431),
-                                    zoom: 9,
-                                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                                };
+              }
 
-                                var peta = new google.maps.Map(document.getElementById("googleMap"), propertiPeta);
+              function initialize() {
+                var propertiPeta = {
+                  center: new google.maps.LatLng(-7.2756141, 112.6426431),
+                  zoom: 9,
+                  mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
 
-                                // even listner ketika peta diklik
-                                google.maps.event.addListener(peta, 'click', function(event) {
-                                    taruhMarker(this, event.latLng);
-                                });
+                var peta = new google.maps.Map(document.getElementById("googleMap"), propertiPeta);
 
-                            }
+                // even listner ketika peta diklik
+                google.maps.event.addListener(peta, 'click', function(event) {
+                  taruhMarker(this, event.latLng);
+                });
+
+              }
 
 
-                            // event jendela di-load  
-                            google.maps.event.addDomListener(window, 'load', initialize);
-                        </script>
+              // event jendela di-load  
+              google.maps.event.addDomListener(window, 'load', initialize);
+            </script>
 
-                    </head>
+          </head>
 
-                    <body>
+          <body>
 
-                        <div id="googleMap" style="width:100%;height:380px;"></div>
+            <div id="googleMap" style="width:100%;height:380px;"></div>
 
-                        <form action="<?php echo base_url()?>admin/tambah_map" method="post">
-                            <input type="text" name="nama_resto" value="" placeholder="Nama Restoran">
-                            <input type="text" name="alamat" value="" placeholder="Alamat Restoran">
-                            <input type="text" id="lat" name="lat" value="">
-                            <input type="text" id="lng" name="lng" value="">
-                            <button type="submit">done</button>
-                        </form>
+            <form action="<?php echo base_url() ?>admin/tambah_map" method="post">
+              <input type="text" name="nama_resto" value="" placeholder="Nama Restoran">
+              <input type="text" name="alamat" value="" placeholder="Alamat Restoran">
+              <input type="text" id="lat" name="lat" value="">
+              <input type="text" id="lng" name="lng" value="">
+              <button type="submit">done</button>
+            </form>
 
-                    </body>
+          </body>
         </div>
       </main>
     </div>

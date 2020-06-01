@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -78,6 +79,7 @@
     <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
     <ul class="navbar-nav px-3">
       <li class="nav-item text-nowrap">
+        <a class="nav-link" href="<?php echo base_url(); ?>login/logout">Logout</a>
       </li>
     </ul>
   </nav>
@@ -96,12 +98,14 @@
                 Dashboard <span class="sr-only">(current)</span>
               </a>
             </li>
-            </li>
             &nbsp
-            <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url() ?>admin/restoran">
-                <button class="btn btn-danger">Cancel</button>
-              </a>
+            <li class="nav-item" color="red">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="red" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+              </svg>
+              Data pelanggan
             </li>
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url() ?>admin/index">
@@ -173,41 +177,48 @@
           </ul>
         </div>
       </nav>
+
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-        <br><br><br>
-        <h3>Edit Data Resto & Cafe</h3>
-        <br>
+        <br><br>
+        &nbsp
         <div class="table-responsive">
-          <?php foreach ($resto as $data) : ?>
-            <form action="<?php echo base_url() ?>admin/update_resto" enctype="multipart/form-data" method="post">
-              <div class="form-group">
-                <label>ID Menu = <?php echo $data->id_resto ?></label>
-                <input type="hidden" name="id_resto" class="form-control" value="<?php echo $data->id_resto ?>">
-              </div>
-              <div class="form-group">
-                <label>Nama Restoran</label>
-                <input type="text" name="nama_resto" class="form-control" value="<?php echo $data->nama_resto ?>">
-              </div>
+          <table class="table table-striped table-sm">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>id_delivery</th>
+                <th>Nama Delivery</th>
+                <th>Harga</th>
+                <th>Alamat</th>
+                <th>No hp</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
 
-              <div class="form-group">
-                <label>Alamat</label>
-                <input type="text" name="alamat" class="form-control" value="<?php echo $data->alamat ?>">
-              </div>
+              <?php $no = 1;
+              foreach ($user as $data) : ?>
+                <tr>
+                  <td><?php echo $no;
+                      $no++; ?></td>
+                  <td><?php echo $data->id_user; ?></td>
+                  <td><?php echo $data->no_hp_user; ?></td>
+                  <td><?php echo $data->alamat_user; ?></td>
+                  <td><?php echo $data->password; ?></td>
+                  <td><?php echo $data->jenis_kelamin; ?></td>
+                  <td>
+                    <a href="<?php echo base_url() ?>admin/hapus/<?php echo $data->id_user; ?>" class="btn btn-danger">
+                      Delete
+                    </a>
+                    <a href="<?php echo base_url() ?>admin/edit_user/<?php echo $data->id_user; ?>" class="btn btn-primary">
+                      Edit data
+                    </a>
+                  </td>
+                </tr>
+              <?php endforeach ?>
 
-              <div class="form-group">
-                <label>Deskripsi</label>
-                <input type="text" name="deskripsi" class="form-control" value="<?php echo $data->deskripsi ?>">
-              </div>
-
-              <div class="form-group">
-                <label for="name">Gambar Restoran</label>
-                <input type="file" name="gambar" class="form-control" >
-                <img src="<?php echo base_url('gambar/' . $data->gambar_resto . ''); ?>" height="200px" width="300px">
-              </div>
-              <input type="hidden" name="old_gambar" class="form-control" value="<?php echo $data->gambar_resto ?>">
-              <button type="submit" value="Tambah" class="btn btn-warning">Simpan</button>
-            </form>
-          <?php endforeach ?>
+            </tbody>
+          </table>
         </div>
       </main>
     </div>

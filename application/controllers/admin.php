@@ -31,6 +31,16 @@ class admin extends CI_Controller
 		$data['delivery'] = $this->m_data_admin->tampil_data_delivery()->result();
 		$this->load->view('admin/v_delivery', $data);
 	}
+	public function user()
+	{
+		$data['user'] = $this->m_data_admin->tampil_data_user()->result();
+		$this->load->view('admin/v_pelanggan', $data);
+	}
+	public function reservasi()
+	{
+		$data['reservasi'] = $this->m_data_admin->tampil_data_reservasi()->result();
+		$this->load->view('admin/v_reservasi', $data);
+	}
 	function tambah()
 	{
 		$data['menu'] = $this->m_data_admin->tampil_data_resto()->result();
@@ -78,7 +88,7 @@ class admin extends CI_Controller
 			return $this->upload->data()["file_name"];
 		}
 
-		return $this->upload->data()["file_name"];
+		return $this->input->post('old_gambar');;
 	}
 
 	function tambah_aksi()
@@ -105,14 +115,15 @@ class admin extends CI_Controller
 	}
 	function tambah_aksi_resto()
 	{
-		$id_resto = $this->input->post('id_resto');
+		$deskripsi = $this->input->post('deskripsi');
 		$gambar = $this->gambar = $this->_uploadImage();
 		$nama_resto = $this->input->post('nama_resto');
 		$alamat = $this->input->post('alamat');
 		$data2 = array(
-			'id_resto' => $id_resto,
+			
 			'nama_resto' => $nama_resto,
 			'alamat' => $alamat,
+			'deskripsi' => $deskripsi,
 			'gambar_resto' => $gambar
 		);
 		$this->m_data_admin->input_data($data2, 'restoran');
@@ -142,6 +153,12 @@ class admin extends CI_Controller
 		$data['resto'] = $this->m_data_admin->edit_data($where1, 'restoran')->result();
 		$this->load->view('admin/v_edit_resto', $data);
 	}
+	function edit_user($id)
+	{
+		$where1 = array('id_user' => $id);
+		$data['user'] = $this->m_data_admin->edit_data($where1, 'user')->result();
+		$this->load->view('admin/v_edit_user', $data);
+	}
 
 	function update()
 	{
@@ -167,17 +184,46 @@ class admin extends CI_Controller
 
 		redirect('admin/index');
 	}
+	function update_user()
+	{
+		$id = $this->input->post('id_user');
+		$nama = $this->input->post('nama');
+		$nohp = $this->input->post('nohp');
+		$alamat = $this->input->post('alamat');
+		$password = $this->input->post('password');
+		$jenis = $this->input->post('jenis');
+
+		$data = array(
+			'nama' => $nama,
+			'no_hp_user' => $nohp,
+			'alamat_user' => $alamat,
+			'password' => $password,
+			'jenis_kelamin' => $jenis
+		);
+
+		$where = array(
+			'id_user' => $id
+		);
+
+		$this->m_data_admin->update_data($where, $data, 'user');
+
+		redirect('admin/index');
+	}
 	function update_resto()
 	{
+		$deskripsi = $this->input->post('deskripsi');
 		$id_resto = $this->input->post('id_resto');
 		$nama = $this->input->post('nama_resto');
 		$alamat = $this->input->post('alamat');
-		$gambar = $this->gambar = $this->_uploadImage();
-
+		if (!empty($_FILES["gambar"])) {
+			$gambar = $this->gambar = $this->_uploadImage();
+		} else {
+			$gambar = $this->gambar = $this->input->post('old_gambar');
+		}
 		$data = array(
-			'id_resto' => $id_resto,
 			'nama_resto' => $nama,
 			'alamat' => $alamat,
+			'deskripsi' => $deskripsi,
 			'gambar_resto' => $gambar
 		);
 

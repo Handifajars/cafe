@@ -584,7 +584,7 @@
                                 <select name="tempat" class="form-control" required>
                                     <option value="">-PILIH-</option>
                                     <?php foreach ($maps as $data) : ?>
-                                        <option value='<?php echo $data['alamat_resto'] ?>'><?php echo $data['alamat_resto'] ?></option>
+                                        <option value='<?php echo $data['alamat_resto'] ?>'><?php echo $data['nama_resto'] ?> - <?php echo $data['alamat_resto'] ?></option>
                                     <?php endforeach ?>
                                 </select>
                             </div>

@@ -49,7 +49,7 @@ class login extends CI_Controller
 
 			$this->session->set_userdata($data_session);
 
-			redirect(base_url("user"));
+			redirect(base_url("cafe"));
 		} elseif ($cek1 > 0) {
 
 			$data_session = array(

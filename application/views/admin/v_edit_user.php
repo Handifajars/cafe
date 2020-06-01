@@ -178,34 +178,35 @@
         <h3>Edit Data Resto & Cafe</h3>
         <br>
         <div class="table-responsive">
-          <?php foreach ($resto as $data) : ?>
-            <form action="<?php echo base_url() ?>admin/update_resto" enctype="multipart/form-data" method="post">
+          <?php foreach ($user as $data) : ?>
+            <form action="<?php echo base_url() ?>admin/update_user" enctype="multipart/form-data" method="post">
               <div class="form-group">
-                <label>ID Menu = <?php echo $data->id_resto ?></label>
-                <input type="hidden" name="id_resto" class="form-control" value="<?php echo $data->id_resto ?>">
+                <label>Id user = <?php echo $data->id_user ?></label>
+                <input type="hidden" name="id_user" class="form-control" value="<?php echo $data->id_user ?>">
               </div>
               <div class="form-group">
-                <label>Nama Restoran</label>
-                <input type="text" name="nama_resto" class="form-control" value="<?php echo $data->nama_resto ?>">
-              </div>
-
-              <div class="form-group">
-                <label>Alamat</label>
-                <input type="text" name="alamat" class="form-control" value="<?php echo $data->alamat ?>">
+                <label>Nama</label>
+                <input type="text" name="nama" class="form-control" value="<?php echo $data->nama ?>">
               </div>
 
               <div class="form-group">
-                <label>Deskripsi</label>
-                <input type="text" name="deskripsi" class="form-control" value="<?php echo $data->deskripsi ?>">
+                <label>No Hp</label>
+                <input type="text" name="nohp" class="form-control" value="<?php echo $data->no_hp_user ?>">
               </div>
 
               <div class="form-group">
-                <label for="name">Gambar Restoran</label>
-                <input type="file" name="gambar" class="form-control" >
-                <img src="<?php echo base_url('gambar/' . $data->gambar_resto . ''); ?>" height="200px" width="300px">
+                <label>alamat</label>
+                <input type="text" name="alamat" class="form-control" value="<?php echo $data->alamat_user ?>">
               </div>
-              <input type="hidden" name="old_gambar" class="form-control" value="<?php echo $data->gambar_resto ?>">
-              <button type="submit" value="Tambah" class="btn btn-warning">Simpan</button>
+              <div class="form-group">
+                <label>jenis klamin</label>
+                <input type="text" name="jenis" class="form-control" value="<?php echo $data->jenis_kelamin ?>">
+              </div>
+              <div class="form-group">
+                <label>password</label>
+                <input type="text" name="password" class="form-control" value="<?php echo $data->password ?>">
+              </div>
+              <button type="submit" value="update" class="btn btn-warning">Simpan</button>
             </form>
           <?php endforeach ?>
         </div>

@@ -105,7 +105,7 @@
                                 <circle cx="20" cy="21" r="1"></circle>
                                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                             </svg>
-                            Data Restoran
+                            Data Maps
                         </li>
                         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                             <span>Tambah Alamat Resto</span>
@@ -129,6 +129,17 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url() ?>admin/restoran">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                                Restoran
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url() ?>admin/delivery">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2">
                                     <line x1="18" y1="20" x2="18" y2="10"></line>
@@ -139,7 +150,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="<?php echo base_url() ?>admin/reservasi">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers">
                                     <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
                                     <polyline points="2 17 12 22 22 17"></polyline>
@@ -163,7 +174,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="<?php echo base_url() ?>admin/user">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
                                     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                                     <circle cx="9" cy="7" r="4"></circle>
@@ -182,60 +193,60 @@
                 &nbsp
                 <div class="table-responsive">
 
-                <head>
-                    <title>Maps Cafe</title>
-                    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
-                    <script type="text/javascript">
-                        function init() {
-                            var info_window = new google.maps.InfoWindow();
+                    <head>
+                        <title>Maps Cafe</title>
+                        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
+                        <script type="text/javascript">
+                            function init() {
+                                var info_window = new google.maps.InfoWindow();
 
-                            // menentukan level zoom
-                            var zoom = 12;
+                                // menentukan level zoom
+                                var zoom = 12;
 
-                            // menentikan latitude dan longitude
-                            var pos = new google.maps.LatLng(-7.244103300143218, 112.75935786910324);
+                                // menentikan latitude dan longitude
+                                var pos = new google.maps.LatLng(-7.244103300143218, 112.75935786910324);
 
-                            // menentukan opsi peta
-                            var options = {
-                                'center': pos,
-                                'zoom': zoom,
-                                'mapTypeId': google.maps.MapTypeId.ROADMAP
-                            };
+                                // menentukan opsi peta
+                                var options = {
+                                    'center': pos,
+                                    'zoom': zoom,
+                                    'mapTypeId': google.maps.MapTypeId.ROADMAP
+                                };
 
-                            // membuat peta
-                            var map = new google.maps.Map(document.getElementById('maps'), options);
-                            info_window = new google.maps.InfoWindow({
-                                'content': 'loading...'
-                            });
-
-                            // membuat marker
-                            <?php foreach ($maps as $map) { ?>
-                                var marker = new google.maps.Marker({
-                                    title: '<?php echo $map['nama_resto']?>',
-                                    alamat: '<?php echo $map['alamat_resto']?>',
-                                    position: new google.maps.LatLng(<?php echo $map['lat'] ?>, <?php echo $map['lng'] ?>),
-                                    animation: google.maps.Animation.BOUNCE,
-                                    map: map
+                                // membuat peta
+                                var map = new google.maps.Map(document.getElementById('maps'), options);
+                                info_window = new google.maps.InfoWindow({
+                                    'content': 'loading...'
                                 });
-                            
 
-                            // set marker di peta
-                            marker.setMap(map);
+                                // membuat marker
+                                <?php foreach ($maps as $map) { ?>
+                                    var marker = new google.maps.Marker({
+                                        title: '<?php echo $map['nama_resto'] ?>',
+                                        alamat: '<?php echo $map['alamat_resto'] ?>',
+                                        position: new google.maps.LatLng(<?php echo $map['lat'] ?>, <?php echo $map['lng'] ?>),
+                                        animation: google.maps.Animation.BOUNCE,
+                                        map: map
+                                    });
 
-                            // membuat event ketika marker di click
-                            google.maps.event.addListener(marker, 'click', function() {
-                                info_window.setContent('<b>' + this.title +'<br>'+ this.alamat + '</b>');
-                                info_window.open(map, this);
-                            });
-                            <?php  } ?>
-                        }
-                        google.maps.event.addDomListener(window, 'load', init);
-                    </script>
-                </head>
 
-                <body>
-                    <div id="maps" style="height: 480px; position: relative; overflow: hidden;"> </div>
-                </body>
+                                    // set marker di peta
+                                    marker.setMap(map);
+
+                                    // membuat event ketika marker di click
+                                    google.maps.event.addListener(marker, 'click', function() {
+                                        info_window.setContent('<b>' + this.title + '<br>' + this.alamat + '</b>');
+                                        info_window.open(map, this);
+                                    });
+                                <?php  } ?>
+                            }
+                            google.maps.event.addDomListener(window, 'load', init);
+                        </script>
+                    </head>
+
+                    <body>
+                        <div id="maps" style="height: 480px; position: relative; overflow: hidden;"> </div>
+                    </body>
                 </div>
             </main>
         </div>
